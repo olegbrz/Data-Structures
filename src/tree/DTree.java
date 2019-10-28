@@ -25,28 +25,35 @@ public class DTree<E> implements BinaryTree<E> {
 		root.right = TR.root;
 	}
 	
+	public boolean search(DTree<E> T, E it) {
+		if (T.isEmpty())
+			return false;
+		else
+			return (T.root() == it) || search(T.left(), it) || search(T.right(), it);
+	}
+	
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return root == null;
 	}
 
 	@Override
 	public E root() {
-		// TODO Auto-generated method stub
-		return null;
+		return root.elem;
 	}
 
 	@Override
-	public BinaryTree<E> left() {
-		// TODO Auto-generated method stub
-		return null;
+	public DTree<E> left() {
+		DTree<E> T = new DTree<E>();
+		T.root = this.root.left;
+		return T;
 	}
 
 	@Override
-	public BinaryTree<E> right() {
-		// TODO Auto-generated method stub
-		return null;
+	public DTree<E> right() {
+		DTree<E> T = new DTree<E>();
+		T.root = this.root.right;
+		return T;
 	}
 
 }
