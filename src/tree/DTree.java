@@ -2,6 +2,18 @@ package tree;
 
 public class DTree<E> implements BinaryTree<E> {
 
+	protected static class Node<E> {
+		E elem;
+		Node<E> left;
+		Node<E> right;
+	}
+	
+	Node<E> root;
+	
+	public DTree() {
+		root = null;
+	}
+	
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
