@@ -43,9 +43,13 @@ public class DTree<E> implements BinaryTree<E> {
 				);
 	}
 	
-	private boolean allGreater(E root2, DTree<E> right) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean allGreater(E it, DTree<E> T) {
+		return (
+				T.isEmpty() ||
+				((T.root().compareTo(it)) &&
+				allGreater(it, T.left()) &&
+				allGreater(it, T.right()))
+				);
 	}
 	
 	public boolean isBST(DTree<E> T) {
@@ -105,16 +109,16 @@ public class DTree<E> implements BinaryTree<E> {
 	}
 	
 	protected Node<E> deleteAux(Node<E> aux) {
-		if ( aux.right == null ) return aux.left;
-		else if (aux.left == null ) return aux.right;
+		if (aux.right == null) return aux.left;
+		else if (aux.left == null) return aux.right;
 		else {
 			Node <E > maxmin = aux.left, prev = aux ;
-			while ( maxmin.right != null ) {
+			while (maxmin.right != null) {
 				prev = maxmin;
 				maxmin = maxmin.right;
 			}
 			aux.elem = maxmin.elem ;
-			if ( prev == aux ) aux.left = deleteAux (maxmin);
+			if (prev == aux) aux.left = deleteAux(maxmin);
 			else prev.right = deleteAux(maxmin);
 			return aux;
 		}
