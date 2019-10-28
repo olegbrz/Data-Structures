@@ -37,7 +37,7 @@ public class DTree<E> implements BinaryTree<E> {
 	public boolean allLower(E it, DTree<E> T) {
 		return (
 				T.isEmpty() ||
-				((T.root() < it) &&
+				((T.root().compareTo(it)) &&
 				allLower(it, T.left()) &&
 				allLower(it, T.right()))
 				);
@@ -48,13 +48,13 @@ public class DTree<E> implements BinaryTree<E> {
 		return false;
 	}
 	
-	public boolean isBsT(DTree<E> T) {
+	public boolean isBST(DTree<E> T) {
 		return (
 				T.isEmpty()) ||
 				(allLower(T.root(), T.left()) ||
 				allGreater(T.root(), T.right())) ||
-				(isBsT(T.left()) &&
-				 isBsT(T.right())
+				(isBST(T.left()) &&
+				 isBST(T.right())
 				);
 	}
 	
@@ -81,7 +81,44 @@ public class DTree<E> implements BinaryTree<E> {
 		else prev.left = newnode;
 		}
 	}
-
+	
+	public void delete (E it) {
+	Node<E> aux = root, ant = null;
+	boolean found = false;
+	while (!found && ( aux != null )) {
+		int cmp = aux.elem.compareTo(it);
+		if ( cmp == 0)
+			found = true ;
+		else {
+			ant = aux ;
+			if (cmp < 0) aux = aux.right ;
+			else aux = aux.left ; 
+			}
+		}
+	
+	if (found) {
+		if (ant == null) root = deleteAux(aux);
+		else if (ant.elem.compareTo(it) <0)
+			ant.right = deleteAux(aux);
+		else ant.left = deleteAux(aux);
+		}
+	}
+	
+	protected Node<E> deleteAux(Node<E> aux) {
+		if ( aux.right == null ) return aux.left;
+		else if (aux.left == null ) return aux.right;
+		else {
+			Node <E > maxmin = aux.left, prev = aux ;
+			while ( maxmin.right != null ) {
+				prev = maxmin;
+				maxmin = maxmin.right;
+			}
+			aux.elem = maxmin.elem ;
+			if ( prev == aux ) aux.left = deleteAux (maxmin);
+			else prev.right = deleteAux(maxmin);
+			return aux;
+		}
+	}
 
 	@Override
 	public boolean isEmpty() {
