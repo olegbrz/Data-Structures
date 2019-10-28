@@ -29,9 +29,37 @@ public class DTree<E> implements BinaryTree<E> {
 		if (T.isEmpty())
 			return false;
 		else
-			return (T.root() == it) || search(T.left(), it) || search(T.right(), it);
+			return (T.root() == it) ||
+					search(T.left(), it) ||
+					search(T.right(), it);
 	}
 	
+	public boolean allLower(E it, DTree<E> T) {
+		return (
+				T.isEmpty() ||
+				((T.root() < it) &&
+				allLower(it, T.left()) &&
+				allLower(it, T.right()))
+				);
+	}
+	
+	private boolean allGreater(E root2, DTree<E> right) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public boolean isBsT(DTree<E> T) {
+		return (
+				T.isEmpty()) ||
+				(allLower(T.root(), T.left()) ||
+				allGreater(T.root(), T.right())) ||
+				(isBsT(T.left()) &&
+				 isBsT(T.right())
+				);
+	}
+	
+
+
 	@Override
 	public boolean isEmpty() {
 		return root == null;
