@@ -58,6 +58,29 @@ public class DTree<E> implements BinaryTree<E> {
 				);
 	}
 	
+	public void insert ( E it ) {
+	Node <E> newnode = new Node <E>();
+	newnode.elem = it ;
+	newnode.left = newnode.right = null;
+	
+	if ( root == null ) {
+		root = newnode;
+		}
+	else {
+		Node <E > aux = root, prev = null;
+		
+		while ( aux != null ) {
+			prev = aux ;
+			if (aux.elem.compareTo(it) < 0)
+				aux = aux.right;
+			else aux = aux.left;
+		}
+		
+		if (prev.elem.compareTo(it) < 0)
+			prev.right = newnode;
+		else prev.left = newnode;
+		}
+	}
 
 
 	@Override
