@@ -10,8 +10,19 @@ public class DTree<E> implements BinaryTree<E> {
 	
 	Node<E> root;
 	
+	/* Creates an empty tree */
 	public DTree() {
 		root = null;
+	}
+	
+	/* Creates a tree given its root and the
+	 * left and right subtrees
+	 */
+	public DTree(E it, DTree<E> TL, DTree<E> TR) {
+		root = new Node<E>();
+		root.elem = it;
+		root.left = TL.root;
+		root.right = TR.root;
 	}
 	
 	@Override
