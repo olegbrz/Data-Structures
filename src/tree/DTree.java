@@ -46,6 +46,12 @@ public class DTree<E> implements BinaryTree<E> {
 		}
 	}
 	
+	public boolean perfect(DTree<E> T) {
+		// Calculate leaf node
+		int depth = leftMostLeaf(T);
+		return perfectR(T, depth, 0);
+	}
+	
 	private static<E> int leftMostLeaf(DTree<E> T) {
 		int depth = 0;
 				while (!T.isEmpty()) {
@@ -56,7 +62,7 @@ public class DTree<E> implements BinaryTree<E> {
 	}
 	
 	/* checks whether the tree is perfect */
-	public boolean perfectR(BinaryTree<E> T, int depth, int level) {
+	public boolean perfectR(DTree<E> T, int depth, int level) {
 		if (T.isEmpty()) {
 			return true;
 		}
@@ -118,7 +124,7 @@ public class DTree<E> implements BinaryTree<E> {
 				);
 	}
 	
-	public void insert ( E it ) {
+	public void insert (E it) {
 	Node <E> newnode = new Node <E>();
 	newnode.elem = it ;
 	newnode.left = newnode.right = null;
@@ -127,7 +133,7 @@ public class DTree<E> implements BinaryTree<E> {
 		root = newnode;
 		}
 	else {
-		Node <E > aux = root, prev = null;
+		Node <E> aux = root, prev = null;
 		
 		while ( aux != null ) {
 			prev = aux ;
