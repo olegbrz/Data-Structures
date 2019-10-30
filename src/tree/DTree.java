@@ -25,6 +25,32 @@ public class DTree<E> implements BinaryTree<E> {
 		root.right = TR.root;
 	}
 	
+	/** returns the number of nodes in the tree */
+	public int size(BinaryTree<E> T) {
+		if (!T.isEmpty()) {
+			return 1 + size(T.left()) + size(T.right());
+		}
+		else
+			return 0;
+	}
+	
+	/** returns the height of the tree */
+	public int height(BinaryTree<E> T) {
+		
+	}
+	
+	/** checks whether the tree is perfect */
+	public boolean perfect(BinaryTree<E> T) {
+		
+	}
+	
+	/** checks whether the tree is complete */
+	public boolean complete(BinaryTree<E> T ) {
+		
+	}
+
+	
+	
 	public boolean search(DTree<E> T, E it) {
 		if (T.isEmpty())
 			return false;
