@@ -25,7 +25,7 @@ public class DTree<E> implements BinaryTree<E> {
 		root.right = TR.root;
 	}
 	
-	/** returns the number of nodes in the tree */
+	/* returns the number of nodes in the tree */
 	public int size(BinaryTree<E> T) {
 		if (!T.isEmpty()) {
 			return 1 + size(T.left()) + size(T.right());
@@ -34,7 +34,7 @@ public class DTree<E> implements BinaryTree<E> {
 			return 0;
 	}
 	
-	/** returns the height of the tree */
+	/* returns the height of the tree */
 	public int height(BinaryTree<E> T) {
 		if (T.isEmpty()) {
 			return 0;
@@ -46,17 +46,40 @@ public class DTree<E> implements BinaryTree<E> {
 		}
 	}
 	
-	/** checks whether the tree is perfect */
-	public boolean perfect(BinaryTree<E> T) {
-		
+	private static<E> int leftMostLeaf(DTree<E> T) {
+		int depth = 0;
+				while (!T.isEmpty()) {
+					depth++;
+					T = T.left();
+				}
+		return depth;
 	}
 	
-	/** checks whether the tree is complete */
+	/* checks whether the tree is perfect */
+	public boolean perfectR(BinaryTree<E> T, int depth, int level) {
+		if (T.isEmpty()) {
+			return true;
+		}
+		else if (T.right().isEmpty() && T.left().isEmpty()) { // leaf-node
+			return (depth == level + 1);
+		}
+		else if (T.right().isEmpty() || T.left().isEmpty()){ 
+			return false;
+		}
+		else {
+			return perfect(T.right()) && perfect(T.left()); // node w/ child nodes
+		}
+	}
+	
+	/* checks whether the tree is complete */
 	public boolean complete(BinaryTree<E> T) {
-		
+		return false;
 	}
 
-	
+	/* checks whether the tree is strictly binary */
+	public boolean strictlyBinary (BinaryTree<E> T ) {
+		return false;
+	}
 	
 	public boolean search(DTree<E> T, E it) {
 		if (T.isEmpty())
