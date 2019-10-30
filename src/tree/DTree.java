@@ -36,7 +36,14 @@ public class DTree<E> implements BinaryTree<E> {
 	
 	/** returns the height of the tree */
 	public int height(BinaryTree<E> T) {
-		
+		if (T.isEmpty()) {
+			return 0;
+		}
+		else {
+			int hleft = height(T.left());
+			int hright = height(T.right());
+			return Math.max(hleft, hright) + 1;
+		}
 	}
 	
 	/** checks whether the tree is perfect */
