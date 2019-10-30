@@ -42,7 +42,7 @@ public class DTree<E> implements BinaryTree<E> {
 		else {
 			int hleft = height(T.left());
 			int hright = height(T.right());
-			return Math.max(hleft, hright) + 1;
+			return Math.max(hleft, hright);
 		}
 	}
 	
@@ -52,7 +52,7 @@ public class DTree<E> implements BinaryTree<E> {
 	}
 	
 	/** checks whether the tree is complete */
-	public boolean complete(BinaryTree<E> T ) {
+	public boolean complete(BinaryTree<E> T) {
 		
 	}
 
